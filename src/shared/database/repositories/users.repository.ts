@@ -11,6 +11,10 @@ export class UsersRepository {
     return this.prismaService.user.findUnique(filter)
   }
 
+  findFirst(filter: Prisma.UserFindFirstArgs) {
+    return this.prismaService.user.findFirst(filter)
+  }
+
   create(createDto: Prisma.UserCreateArgs) {
     return this.prismaService.user.create(createDto)
   }

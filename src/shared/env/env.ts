@@ -15,6 +15,10 @@ export const envSchema = z.object({
   MAIL_DEFAULT_NAME: z.string(),
   MAIL_CLIENT_PORT: z.coerce.number(),
   DATABASE_URL: z.string().url(),
+  AUTH_JWT_SECRET: z.string(),
+  AUTH_JWT_TOKEN_EXPIRES_IN: z.string(),
+  AUTH_REFRESH_SECRET: z.string(),
+  AUTH_REFRESH_TOKEN_EXPIRES_IN: z.string(),
 })
 
 export type Env = z.infer<typeof envSchema>

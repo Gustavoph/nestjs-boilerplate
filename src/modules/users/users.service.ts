@@ -1,6 +1,6 @@
 import * as crypto from 'node:crypto'
 
-import { Injectable } from '@nestjs/common'
+import { ConflictException, Injectable } from '@nestjs/common'
 import * as bcrypt from 'bcryptjs'
 
 import { CreateUserDto } from './dto/create-user.dto'
@@ -18,6 +18,12 @@ export class UsersService {
   async create(createUserDto: CreateUserDto) {
     const { email, name, password } = createUserDto
 
+    const userWithSameEmail = await this.usersRepository.findFirst({
+      where: { email },
+    })
+    if (userWithSameEmail)
+      throw new ConflictException('User with same email already exists.')
+
     const hash = crypto.createHash('sha256').digest('hex')
     const passwordHash = await bcrypt.hash(password, 8)
 
@@ -26,10 +32,7 @@ export class UsersService {
     })
 
     if (id) {
-      await this.mailService.emailConfirmation({
-        data: { hash },
-        to: email,
-      })
+      await this.mailService.emailConfirmation({ data: { hash }, to: email })
     }
   }
 }
