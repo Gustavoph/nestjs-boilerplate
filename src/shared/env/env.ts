@@ -14,6 +14,7 @@ export const envSchema = z.object({
   MAIL_DEFAULT_EMAIL: z.string(),
   MAIL_DEFAULT_NAME: z.string(),
   MAIL_CLIENT_PORT: z.coerce.number(),
+  DATABASE_URL: z.string().url(),
 })
 
 export type Env = z.infer<typeof envSchema>

@@ -4,8 +4,8 @@ import { Injectable } from '@nestjs/common'
 
 import { MailData } from './interfaces/mail-data.interface'
 
-import { EnvService } from '@/env/env.service'
-import { MailerService } from '@/mailer/mailer.service'
+import { EnvService } from '@/shared/env/env.service'
+import { MailerService } from '@/shared/mailer/mailer.service'
 
 @Injectable()
 export class MailService {
@@ -21,8 +21,9 @@ export class MailService {
       templatePath: path.join(
         process.cwd(),
         'src',
+        'shared',
         'mail',
-        'mail-template',
+        'mail-templates',
         'email-confirmation.hbs',
       ),
       context: {},

@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 
-import { envSchema } from './env/env'
-import { EnvModule } from './env/env.module'
-import { MailerModule } from './mailer/mailer.module'
+import { UsersModule } from './modules/users/users.module'
+import { DatabaseModule } from './shared/database/database.module'
+import { envSchema } from './shared/env/env'
+import { EnvModule } from './shared/env/env.module'
+import { MailerModule } from './shared/mailer/mailer.module'
 
 @Module({
   imports: [
@@ -13,6 +15,8 @@ import { MailerModule } from './mailer/mailer.module'
       envFilePath: ['.env'],
     }),
     EnvModule,
+    UsersModule,
+    DatabaseModule,
     MailerModule,
   ],
 })
