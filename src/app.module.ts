@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config'
 
 import { envSchema } from './env/env'
 import { EnvModule } from './env/env.module'
+import { MailerModule } from './mailer/mailer.module'
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { EnvModule } from './env/env.module'
       envFilePath: ['.env'],
     }),
     EnvModule,
+    MailerModule,
   ],
 })
 export class AppModule {}
